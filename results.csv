@@ -1,0 +1,32 @@
+section,experiment,description,dataset,protocol,metric,value,sd,unit,notes
+reference,Majority class,Always predict CMD,Cassava (Kaggle 2020),-,accuracy,61.5,,%,Floor: CMD share of images
+experiment_log,Exp 1,"Frozen MobileNetV2, head only, class weights, no augmentation",Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,67.32,0.96,%,Lab notes give sd 0.88
+experiment_log,Exp 2,"Exp 1 + flips, brightness, contrast",Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,66.45,1.46,%,3 of 5 folds; lab notes give 66.60 on all folds
+experiment_log,Exp 3,Two-phase fine-tuning of MobileNetV2,Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,72.37,0.59,%,Lab notes give sd 0.87
+experiment_log,Exp 4,"Exp 3 + offline CLAHE, longer phase 1, cosine decay",Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,74.12,0.3,%,
+experiment_log,Exp 5,Exp 4 at 384x384 input,Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,80.45,1.05,%,Lab notes give sd 0.98
+experiment_log,Exp 6-9,Soft-voting ensemble (exact experiment not recorded),Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,82.6,1.0,%,Exps 6-9 log not in handover
+experiment_log,Exp 10,Noisy-Student EfficientNet-B0 + CutMix/MixUp + per-class focal loss,Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,87.88,0.9,%,Best single model
+experiment_log,Exp 11,"Exp 10 + ConvNeXt-Base specialist (CBB/CBSD/CGM/Healthy), per-class F1-weighted ensemble",Cassava (Kaggle 2020),5-fold StratifiedKFold,accuracy,90.32,0.78,%,Best overall; optimistic: specialist folds differ from evaluation folds. Other notes record 90.28
+cross_dataset_rerun,Pipeline A,"Frozen MobileNetV2+EfficientNet-B0+DenseNet121 features, logistic regression",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,accuracy,70.61,0.16,%,sd of 3 seed means
+cross_dataset_rerun,Pipeline A,"Frozen 3-backbone features, logistic regression",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,balanced_accuracy,53.6,,%,
+cross_dataset_rerun,Pipeline A,"Frozen 3-backbone features, logistic regression",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,macro_f1,0.534,,score,
+cross_dataset_rerun,Pipeline A,"Frozen 3-backbone features, logistic regression",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,fit_time_per_fold,78,,s,
+cross_dataset_rerun,Pipeline A,"Frozen 3-backbone features, random forest",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,accuracy,70.2,,%,
+cross_dataset_rerun,Pipeline A,"Frozen MobileNetV2-only features, logistic regression",Cassava (Kaggle 2020),StratifiedGroupKFold 5 folds x seeds 17/42/1337,accuracy,69.9,,%,Reported in Paper 2 text
+cross_dataset_rerun,Pipeline B,"ConvNeXt-Base fine-tuned, 3 phases, 384x384, CLAHE",Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",accuracy,86.32,,%,Fold sd 0.56
+cross_dataset_rerun,Pipeline B,ConvNeXt-Base fine-tuned,Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",balanced_accuracy,76.7,,%,
+cross_dataset_rerun,Pipeline B,ConvNeXt-Base fine-tuned,Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",macro_f1,0.762,,score,
+cross_dataset_rerun,Pipeline B,ConvNeXt-Base fine-tuned,Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",train_time_per_fold,262,,min,
+cross_dataset_rerun,Pipeline B frozen,ConvNeXt-Base kept frozen in all phases,Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",accuracy,81.88,,%,
+cross_dataset_rerun,Pipeline B frozen,ConvNeXt-Base kept frozen in all phases,Cassava (Kaggle 2020),"StratifiedGroupKFold 5 folds, seed 17 only",train_time_per_fold,170,,min,
+cross_dataset_rerun,B - A,Fine-tuned ConvNeXt-Base minus Pipeline A,Cassava (Kaggle 2020),"Corrected resampled t-test, 5 paired folds",accuracy_difference,15.7,,points,95% CI 14.5 to 17.0; p < 1e-5
+cross_dataset_rerun,B frozen - A,Frozen ConvNeXt-Base minus Pipeline A,Cassava (Kaggle 2020),"Corrected resampled t-test, 5 paired folds",accuracy_difference,11.3,,points,95% CI 9.7 to 12.9; p < 1e-4
+cross_dataset_rerun,B - B frozen,Gain from fine-tuning alone,Cassava (Kaggle 2020),"Corrected resampled t-test, 5 paired folds",accuracy_difference,4.4,,points,95% CI 2.1 to 6.7; p = 0.006
+edge_latency,Exp 11 ensemble,Inference on RTX 5090 (WSL2),Cassava (Kaggle 2020),Per image,latency,89,,ms,
+edge_latency,Exp 11 ensemble,Inference on Jetson Xavier NX,Cassava (Kaggle 2020),Per image,latency,65,,ms,Jetson timed on pre-captured images
+edge_latency,Exp 11 ensemble,Inference on Raspberry Pi 4,Cassava (Kaggle 2020),Per image,latency,254,,ms,
+published,Riaz et al.,EfficientNet-B3,Cassava (Kaggle 2020),Own test split,accuracy,83.0,,%,As reported; Paper 2 Table IV
+published,Fang et al.,ConvNeXt-T fine-tuned,Cassava (Kaggle 2020),80/20,accuracy,88.9,,%,As reported; Paper 2 Table IV
+published,Fang et al.,VGG-13 BN fine-tuned,Cassava (Kaggle 2020),80/20,accuracy,89.0,,%,As reported; Paper 2 Table IV
+published,Kaggle 2020 winner,4-model ensemble,Cassava (Kaggle 2020),Hidden test set,accuracy,91.3,,%,As reported; Paper 2 Table IV
