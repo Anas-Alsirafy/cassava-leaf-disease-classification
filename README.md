@@ -143,6 +143,10 @@ Binary CBB vs Healthy classifier. Choose the backbone with `CONFIG['backbone']` 
 - [ ] INT8 quantisation (TFLite / TensorRT) for the Raspberry Pi and Jetson
 - [ ] End-to-end FIWARE field pipeline (ESP32-CAM → MQTT → Orion → Jetson → database)
 
+## Documentation
+
+Full handover documentation (guide, environment setup, data, configs, experiments, results, known issues, future work) is in [`docs/`](docs/README.md), as Markdown and PDF.
+
 ## Contact
 
 Anas Alsirafy, American University in Cairo (anas.samy@aucegypt.edu). Supervisor: Prof. Maki K. Habib.
